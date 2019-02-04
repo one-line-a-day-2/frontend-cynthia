@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from "react-redux";
 import Login from './components/Login'
+import HomePage from './components/HomePage'
+import NavBar from './components/NavBar'
 import { Route } from 'react-router-dom'
 import { } from './actions';
 
@@ -28,8 +30,10 @@ class App extends Component {
     return (
       <div className="App">
       <h1>One-Line-a-DayII</h1>
+      <NavBar />
+      
       <Route path='/login' component={Login} />
-      {/* <Route path='/' component={HomePage} /> */}
+      <Route path='/' component={HomePage} />
 
 
       

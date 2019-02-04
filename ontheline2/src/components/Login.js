@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import { login } from '../actions'
 
 class Login extends Component {
     constructor(props) {
@@ -11,16 +12,19 @@ class Login extends Component {
         }
     }
   
-    // handleLogin = e => {
-    //     this.setState({[e.target.name]: e.target.value })
-    // }
+    handleLogin = e => {
+        this.setState({[e.target.name]: e.target.value })
+        console.log(e)
+    }
   
-    // addLogin = e => {
-    //     // e.preventDefault(); //don't know if this is needed
-    //     const userInfo = this.state.username;
-    //     localStorage.setItem('userInfo', userInfo);
-    //     window.location.reload();
-    // }
+    addLogin = e => {
+        console.log(e)
+        e.preventDefault();
+        const userInfo = {
+            email: this.state.email,
+            password: this.state.password
+        }
+    }
   
     render() {
       return (
@@ -55,7 +59,11 @@ class Login extends Component {
   
   
   
-  export default Login;
+  const mapStateToProps = (state) => ({
+    errors: state.errors
+})
+
+export  default connect(mapStateToProps, { login })(Login)
   
 
 
