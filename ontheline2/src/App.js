@@ -1,39 +1,37 @@
 import React, { Component } from 'react';
-
 import './App.css';
-import { connect } from "react-redux";
-import Login from './components/Login'
+
+// import { connect } from "react-redux";
+import LogIn from './components/Login'
+import SignUp from './components/SignUp'
 import HomePage from './components/HomePage'
 import NavBar from './components/NavBar'
 import { Route } from 'react-router-dom'
 import { } from './actions';
-
+// import { Switch } from '@material-ui/core';
+// import authenticate from './components/authenticate/authenticate'
 
 
 
 
 class App extends Component {
-  constructor(props){
-    super(props); 
-  
-    
-    
-  }
+ 
 
-    componentDidMount() {
+    // componentDidMount() {
 
-    }
+    // }
 
 
 
   render() {
     return (
       <div className="App">
-      <h1>One-Line-a-DayII</h1>
       <NavBar />
       
-      <Route path='/login' component={Login} />
-      <Route path='/' component={HomePage} />
+      <Route  exact path='/' component={HomePage} />
+      <Route path='/login' component={LogIn} />
+      <Route path='/signup' component={SignUp} />
+      
 
 
       
@@ -42,16 +40,18 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state =>  ({
+// const mapStateToProps = state =>  ({
   
     
    
-  });
+//   });
 
 
 
-export default connect(
-  mapStateToProps,
-   {  }
- )(App);
+// export default connect(
+//   mapStateToProps,
+//    {  }
+//  )(App);
  
+
+export default (App);

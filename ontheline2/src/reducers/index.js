@@ -1,4 +1,4 @@
-import { LOGIN_START,
+import { LOGIN_START, LOGIN_FAILURE,
 //  LOGIN_SUCCESS,
 // LOGIN_FAILURE
 } 
@@ -6,12 +6,17 @@ import { LOGIN_START,
 from '../actions'
 
 
-const initialState = {};
+const initialState = {
+    authenticated: '',
+    error: ''
+};
 
  const loginReducer = (state = initialState, action ) => {
     switch(action.type) {
         case LOGIN_START:
-            return action.payload;
+            return { ...state, authenticated: action.payload }
+        case LOGIN_FAILURE:
+            return {...state, error: action.payload }
         default:
             return state;
     }
