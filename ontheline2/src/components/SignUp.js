@@ -87,20 +87,17 @@
   
 
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-// import { renderComponent } from 'recompose';
+import axios from 'axios';
 
 const styles = theme => ({
   main: {
@@ -141,6 +138,7 @@ class SignUp extends Component {
           super(props);
             this.state = {
               email: '',
+              username: '',
               password: '',
               firstName: '',
               lastName: ''
@@ -153,19 +151,22 @@ class SignUp extends Component {
             }
           
         addSignUp = e => {
-                console.log(this.state)
-                e.preventDefault();
-                this.setState({
-                    email: '',
-                    password: '',
-                    firstName: '',
-                    lastName: ''
-                })
-                // const userInfo = {
-                //     email: this.state.email,
-                //     password: this.state.password
+            e.preventDefault();
+            const endpoint = "https://one-line-a-day-2.herokuapp.com/api/register";
+            axios
+              .post(endpoint, this.state)
+              .then(res => {
+                console.log(res);
+              })
+              .then(() => {
+                this.props.history.push("/");
+              })
+              .catch(err => {
+                console.log({ Error: err });
+              });
+          };
                 
-            }
+            
 
      
 
@@ -201,6 +202,13 @@ class SignUp extends Component {
             <InputLabel htmlFor="email">Email Address</InputLabel>
             <Input autoComplete='off' id="email" name="email" type="text" 
                 value={this.state.email}
+                onChange={this.handleSignUp} autoFocus />
+          </FormControl>
+
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="username">User Name</InputLabel>
+            <Input autoComplete='off' id="username" name="username" type="text" 
+                value={this.state.username}
                 onChange={this.handleSignUp} autoFocus />
           </FormControl>
 

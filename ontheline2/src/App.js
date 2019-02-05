@@ -8,8 +8,7 @@ import HomePage from './components/HomePage'
 import NavBar from './components/NavBar'
 import { Route } from 'react-router-dom'
 import { } from './actions';
-// import { Switch } from '@material-ui/core';
-// import authenticate from './components/authenticate/authenticate'
+import JournalEntry from './components/JournalEntry';
 
 
 
@@ -31,7 +30,7 @@ class App extends Component {
       <Route  exact path='/' component={HomePage} />
       <Route path='/login' component={LogIn} />
       <Route path='/signup' component={SignUp} />
-      
+      <Route path='/journalentry' component={JournalEntry} />
 
 
       

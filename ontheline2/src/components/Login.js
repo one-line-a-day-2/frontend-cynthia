@@ -13,8 +13,9 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 // import { renderComponent } from 'recompose';
-import { logIn } from '../actions'
+// import { logIn } from '../actions'
 import { connect } from "react-redux";
+import axios from 'axios';
 
 const styles = theme => ({
   main: {
@@ -54,7 +55,7 @@ class LogIn extends Component {
         constructor(props) {
           super(props);
             this.state = {
-              email: '',
+              username: '',
               password: ''
             }
       
@@ -65,17 +66,21 @@ class LogIn extends Component {
         }
       
         addLogin = e => {
-            console.log(this.state)
             e.preventDefault();
-            this.props.logIn(this.state)
-            // const userInfo = this.state.email;
-            // localStorage.setItem("jwt", res.data.token)
-            // window.location.reload();
-            this.setState({
-                email: '',
-                password: ''
+            const endpoint = "https://one-line-a-day-2.herokuapp.com/api/login";
+            axios
+            .post(endpoint, this.state)
+            .then(res => {
+                localStorage.setItem("jwt", res.data.token);
             })
-        }
+            .then(() => {
+                this.props.history.push("/");
+            })
+            .catch(err => {
+                console.log({ Error: err });
+            });
+            
+                }
 
      
 
@@ -94,9 +99,9 @@ class LogIn extends Component {
         </Typography>
         <form className={styles.form} onSubmit={this.addLogin} >
           <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input autoComplete='off' id="email" name="email" type="text" 
-                value={this.state.email}
+            <InputLabel htmlFor="username">Email Address</InputLabel>
+            <Input autoComplete='off' id="username" name="username" type="text" 
+                value={this.state.username}
                 onChange={this.handleLogin} autoFocus />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
@@ -136,5 +141,16 @@ const mapStateToProps = state => {
   };
 export default connect(
     mapStateToProps,
-{logIn}
+{}
 )(LogIn);
+
+
+ // console.log(this.state)
+            // e.preventDefault();
+            // this.props.logIn(this.state)
+            // const userInfo = this.state.email;
+            // localStorage.setItem("jwt", res.data.token)
+            // window.location.reload();
+            // this.setState({
+            //     email: '',
+            //     password: ''

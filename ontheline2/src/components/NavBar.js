@@ -33,6 +33,10 @@ const styles = {
 
 
 function NavBar(props) {
+
+   const signout = () => {
+        localStorage.removeItem("jwt");
+      };
   const { classes } = props;
   return (
     <div className={classes.root}>
@@ -42,10 +46,13 @@ function NavBar(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" color="inherit" className={classes.grow}>
-          One-Line-a-DayII
+          One-Line-a-Day-II
           </Typography>
           <NavLink to='/login' color="inherit">Login</NavLink>
           <NavLink to='/signup' color="inherit">Sign Up</NavLink>
+          <NavLink to='/' color="inherit">Home</NavLink>
+          <NavLink to='/journalentry' color="inherit">Journal Entry</NavLink>
+          <NavLink to="/login" exact onClick={signout}>Sign Out</NavLink>
         </Toolbar>
       </AppBar>
     </div>
