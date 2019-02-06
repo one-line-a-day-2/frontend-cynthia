@@ -1,91 +1,3 @@
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { } from '../actions'
-
-// class SignUp extends Component {
-//     constructor(props) {
-//       super(props);
-  
-//         this.state = {
-//           username: '',
-//           password: '',
-//           firstName: '',
-//           lastName: ''
-
-//         }
-//     }
-  
-//     handleSignUp = e => {
-//         this.setState({[e.target.name]: e.target.value })
-//         console.log(e)
-//     }
-  
-//     addSignUp = e => {
-//         console.log(this.state)
-//         e.preventDefault();
-//         // const userInfo = {
-//         //     email: this.state.email,
-//         //     password: this.state.password
-        
-//     }
-  
-//     render() {
-//       return (
-
-//             <div>
-             
-//             <form autoComplete='off' onSubmit={this.addSignUp}>
-
-//             <input
-//                 type="text" 
-//                 placeholder="First Name" 
-//                 name="firstName"
-//                 value={this.state.firstName}
-//                 onChange={this.handleSignUp}
-//                  />
-
-//                      <input
-//                 type="text" 
-//                 placeholder="Last Name" 
-//                 name="lastName"
-//                 value={this.state.lastName}
-//                 onChange={this.handleSignUp}
-//                  />
-
-//                 <input
-//                 type="text" 
-//                 placeholder="username" 
-//                 name="username"
-//                 value={this.state.username}
-//                 onChange={this.handleSignUp}
-//                  />
-
-//                 <input
-//                 type="password" 
-//                 name="password"
-//                 placeholder="password" 
-//                 value={this.state.password}
-//                 onChange={this.handleSignUp}
-//                 />
-//                 <button>Sign Up!</button>
-//             </form>
-          
-//         </div>
-   
-//       );
-//     }
-//   }
-  
-  
-  
-  
-//   const mapStateToProps = (state) => ({
-//     errors: state.errors
-// })
-
-// export  default connect(mapStateToProps, {  })(SignUp)
-  
-
 import React, { Component } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -98,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import axios from 'axios';
+import NavBarLogin from '../components/NavBarLogin'
 
 const styles = theme => ({
   main: {
@@ -129,6 +42,7 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
+    backgroundColor: 'red'
   },
 });
 
@@ -140,8 +54,8 @@ class SignUp extends Component {
               email: '',
               username: '',
               password: '',
-              firstName: '',
-              lastName: ''
+              firstname: '',
+              lastname: ''
             }
       
        }
@@ -175,9 +89,10 @@ class SignUp extends Component {
   return ( 
     //   const {classes } = props;
     <main className={styles.main}>
+    <NavBarLogin />
       <CssBaseline />
-      <Paper className={styles.paper} style={{width: '50%'}} margin="auto">
-        <Avatar className={styles.avatar}  >
+      <Paper className={styles.paper} style={{width: '50%', margin: 'auto'}}>
+        <Avatar className={styles.avatar} style={{ margin: 'auto'}} >
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5" >
@@ -186,14 +101,14 @@ class SignUp extends Component {
         <form className={styles.form} onSubmit={this.addSignUp} >
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="firstname">First Name</InputLabel>
-            <Input autoComplete='off' id="name" name="firstName" type="text" 
+            <Input autoComplete='off' id="name" name="firstname" type="text" 
                 value={this.state.firstName}
                 onChange={this.handleSignUp} autoFocus />
           </FormControl>
 
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="lastname">Last Name</InputLabel>
-            <Input autoComplete='off' name="lastName" type="text" id="lastName" 
+            <Input autoComplete='off' name="lastname" type="text" id="lastname" 
                 value={this.state.lastName}
                 onChange={this.handleSignUp} />
           </FormControl>
@@ -222,7 +137,7 @@ class SignUp extends Component {
           <Button
             type="submit"
             fullWidth
-            variant="contained"
+            // variant="contained"
             color="primary"
             className={styles.submit}
           >
@@ -234,8 +149,6 @@ class SignUp extends Component {
   );
 }
 }
-// LogIn.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
+
 
 export default withStyles(styles)(SignUp);

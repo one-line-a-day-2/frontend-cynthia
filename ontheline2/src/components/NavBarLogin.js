@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -35,7 +34,7 @@ const styles = {
 
 
 
-function NavBar(props) {
+function NavBarLogin(props) {
 
    const signout = () => {
         localStorage.removeItem("jwt");
@@ -52,18 +51,16 @@ function NavBar(props) {
           <Typography variant="h6" color="inherit" className={classes.grow}>
           One-Line-a-Day-II
           </Typography>
-          <NavLink style={{ color: 'white', textDecoration: 'none', padding: '10px' }} to='/' color="inherit">Home</NavLink>
-          <NavLink style={{ color: 'white', textDecoration: 'none', padding: '10px' }} to='/journalentry' color="inherit">Journal Entry</NavLink>
-          <NavLink style={{ color: 'white', textDecoration: 'none', padding: '10px' }} to="/login" exact onClick={signout}>Sign Out</NavLink>
+          <NavLink style={{ color: 'white', textDecoration: 'none', padding: '10px' }} to='/login' color="inherit">Login</NavLink>
+          <NavLink style={{ color: 'white', textDecoration: 'none', padding: '10px'}} to='/signup' color="inherit">Sign Up</NavLink>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 
-NavBar.propTypes = {
+NavBarLogin.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(NavBar);
-
+export default withStyles(styles)(NavBarLogin);

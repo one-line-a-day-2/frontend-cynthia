@@ -11,16 +11,15 @@ import InputLabel from '@material-ui/core/InputLabel';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import withStyles from '@material-ui/core/styles/withStyles';
-// import { renderComponent } from 'recompose';
-// import { logIn } from '../actions'
-import { connect } from "react-redux";
+import {NavLink } from 'react-router-dom';
 import axios from 'axios';
+import NavBarLogin from '../components/NavBarLogin'
+
 
 const styles = theme => ({
   main: {
     width: 'auto',
-    display: 'block', // Fix IE 11 issue.
+    display: 'block', 
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
@@ -42,12 +41,16 @@ const styles = theme => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%', 
     marginTop: theme.spacing.unit,
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
+  buttons: {
+    color: '#3fdfca',
+  }
+ 
 });
 
 
@@ -60,6 +63,7 @@ class LogIn extends Component {
             }
       
        }
+       
         handleLogin = e => {
             this.setState({[e.target.name]: e.target.value })
             console.log(e)
@@ -71,7 +75,8 @@ class LogIn extends Component {
             axios
             .post(endpoint, this.state)
             .then(res => {
-                localStorage.setItem("jwt", res.data.token);
+                const id = res.data.id; localStorage.setItem("jwt", res.data.token);
+              
             })
             .then(() => {
                 this.props.history.push("/");
@@ -88,10 +93,12 @@ class LogIn extends Component {
    
   return ( 
     //   const {classes } = props;
-    <main className={styles.main}>
+   
+    <main className={styles.main}> 
+        <NavBarLogin />
       <CssBaseline />
-      <Paper className={styles.paper}  margin="auto">
-        <Avatar className={styles.avatar}  >
+      <Paper className={styles.paper} style={{width: '50%', margin: 'auto'}} >
+        <Avatar className={styles.avatar}  style={{ margin: 'auto'}} >
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5" >
@@ -110,40 +117,29 @@ class LogIn extends Component {
                 value={this.state.password}
                 onChange={this.handleLogin} />
           </FormControl>
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
+          /> */}
           <Button
             type="submit"
-            fullWidth
+            // fullWidth
             variant="contained"
-            color="primary"
-            className={styles.submit}
+            // color="primary"
+            className={styles.buttons}
           >
             Sign in
           </Button>
         </form>
+        <p>Don't have a account?</p>
+        <NavLink style={{ color: '#59e3bb', textDecoration: 'none'}} to='/signup'>Sign up here!</NavLink>
       </Paper>
     </main>
   );
 }
 }
-// LogIn.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
 
-
-const mapStateToProps = state => {
-    return {
-        error: state.error
-    }
-  };
-export default connect(
-    mapStateToProps,
-{}
-)(LogIn);
-
+export default LogIn;
 
  // console.log(this.state)
             // e.preventDefault();
