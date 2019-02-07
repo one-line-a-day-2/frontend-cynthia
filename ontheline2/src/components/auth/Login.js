@@ -134,7 +134,7 @@ class LogIn extends Component {
 }
 
 const mapStateToProps = state =>  ({
-  fetchEntries: state.fetchEntries,
+  fetchLogin: state.fetchLogin,
   
  
 });

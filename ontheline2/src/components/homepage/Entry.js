@@ -3,8 +3,8 @@ import React from 'react';
 const Entry = props => {
     return (
         <div>
-            <p>{props.entry.title}</p>
-            <p>{props.entry.input}</p>
+            {/* <p>{props.entry.title}</p> */}
+
         </div>
     )
 }

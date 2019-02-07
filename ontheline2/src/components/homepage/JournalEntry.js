@@ -66,63 +66,7 @@ class JournalEntry extends Component {
 })
 }   
 
-// addNewEntry= e =>  {
-//     console.log(e)
-//     e.preventDefault();
-//     const endpoint = 'https://one-line-a-day-2.herokuapp.com/api/users/userID/entries';
-//     axios
-//     .post(endpoint)
-//     .then(res => {
-//         localStorage.getItem("jwt", res.data.token);
-//         // this.setState({id})
-//     })
-//     .then(() => {
-//         this.props.history.push("/");
-//     })
-//     .catch(err => {
-//         console.log({ Error: err });
-//     });
-    
-// }
 
-// deleteEntry= e =>  {
-//     console.log(e)
-//     e.preventDefault();
-//     const endpoint = 'https://one-line-a-day-2.herokuapp.com/api/users/userID/entries/entryID';
-//     axios
-//     .delete(endpoint)
-//     .then(res => {
-//         localStorage.setItem("jwt", res.data.token);
-//         // this.setState({id})
-//     })
-//     .then(() => {
-//         this.props.history.push("/");
-//     })
-//     .catch(err => {
-//         console.log({ Error: err });
-//     });
-    
-// }
-
-// editEntry= e =>  {
-//     console.log(e)
-//     e.preventDefault();
-//     const endpoint = 'https://one-line-a-day-2.herokuapp.com//api/users/userID/entries/entryID';
-//     axios
-//     .put(endpoint)
-//     .then(res => {
-//         localStorage.setItem("jwt", res.data.token);
-//         // this.setState({id})
-//     })
-//     .then(() => {
-//         this.props.history.push("/");
-//     })
-//     .catch(err => {
-//         console.log({ Error: err });
-//     });
-    
-// }
-     
 
   render() {
    
