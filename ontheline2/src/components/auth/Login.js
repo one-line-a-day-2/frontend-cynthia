@@ -13,7 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import {NavLink } from 'react-router-dom';
 import axios from 'axios';
-import NavBarLogin from '../components/NavBarLogin'
+import NavBarLogin from '../navbar/NavBarLogin'
 
 
 const styles = theme => ({

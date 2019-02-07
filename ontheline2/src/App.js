@@ -2,35 +2,32 @@ import React, { Component } from 'react';
 import './App.css';
 
 // import { connect } from "react-redux";
-import LogIn from './components/Login'
-import SignUp from './components/SignUp'
-import HomePage from './components/HomePage'
-import NavBar from './components/NavBar'
+import LogIn from './components/auth/Login'
+import SignUp from './components/auth/SignUp'
+import HomePage from './components/homepage/HomePage'
+import { fetchEntry } from './actions';
 import { Route } from 'react-router-dom'
-// import { } from './actions';
-import JournalEntry from './components/JournalEntry';
-import axios from 'axios';
+import { connect } from "react-redux";
+import JournalEntry from './components/homepage/JournalEntry';
+
 
 
 
 class App extends Component {
-  constructor(props) {
-  super(props);
-  this.state = {
-    username: '',
-    password: '',
-    id: 0
+  constructor(props){
+    super(props); 
   }
-
+  
+componentDidMount() {
+  this.props.fetchEntry();
+  console.log(this.props.fetchEntry())
 }
-
-
 
 
   render() {
     return (
       <div className="App">
-      <Route  exact path='/' component={HomePage}  />
+      <Route  exact path='/' entries={this.props.entries} component={HomePage}  />
       <Route path='/login' component={LogIn} />
       <Route path='/signup' component={SignUp} />
       <Route path='/journalentry' component={JournalEntry} />
@@ -44,19 +41,20 @@ class App extends Component {
 }
 
 
-//  etUsers={this.getUsers}
 
-export default (App);
 
-// const mapStateToProps = state =>  ({
+
+
+const mapStateToProps = state =>  ({
+  entries: state.entries,
+  fetchingEntry: state.fetchingEntry,
   
-    
-   
-//   });
+ 
+});
 
 
 
-// export default connect(
-//   mapStateToProps,
-//    {  }
-//  )(App);
+export default connect(
+  mapStateToProps,
+   { fetchEntry }
+ )(App);

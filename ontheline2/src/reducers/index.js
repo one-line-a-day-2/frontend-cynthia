@@ -1,23 +1,39 @@
-// import { 
-    
-// } 
-
-// from '../actions'
+import { START, SUCCESS, FAILURE } from "../actions";
 
 
-// const initialState = {
-    
-// };
+const initialState = {
+    fetchEntries: false,
+     error: null,
+    entries: [
+        {id: 0, title: 'First Entry', input: 'Something about a journal'},
+        {id: 1, title: 'Second Entry', input: 'Something about a journal'},
+        {id: 2, title: 'Third Entry', input: 'Something about a journal'}
+    ]
+};
 
-//  const loginReducer = (state = initialState, action ) => {
-//     switch(action.type) {
-//         case LOGIN_START:
-//             return { ...state, authenticated: action.payload }
-//         case LOGIN_FAILURE:
-//             return {...state, error: action.payload }
-//         default:
-//             return state;
-//     }
-// }
-
-// export default loginReducer;
+ const rootReducer = (state = initialState, action ) => {
+    switch (action.type) {
+        case START:
+          return {
+            ...state,
+              fetchEntries: true
+          };
+          case SUCCESS:
+            return {
+              ...state,
+              entries: action.payload,
+              fetchEntries: false,
+              error: null
+            };
+          case FAILURE:
+              return {
+                ...state,
+                error: action.payload,
+                fetchEntries: false
+              }
+              default: 
+                return state;
+    }
+ }
+ 
+export default rootReducer;

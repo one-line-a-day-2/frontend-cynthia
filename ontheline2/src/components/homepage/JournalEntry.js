@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
-import NavBar from '../components/NavBar'
+import NavBar from '../navbar/NavBar'
 
 const styles = theme => ({
   main: {
@@ -53,7 +53,7 @@ class JournalEntry extends Component {
           super(props);
             this.state = {
               entry: '',
-              inputs: '',
+              input: '',
               
             }
       
@@ -66,24 +66,24 @@ class JournalEntry extends Component {
 })
 }   
 
-addNewEntry= e =>  {
-    console.log(e)
-    e.preventDefault();
-    const endpoint = 'https://one-line-a-day-2.herokuapp.com/api/users/userID/entries';
-    axios
-    .post(endpoint)
-    .then(res => {
-        localStorage.setItem("jwt", res.data.token);
-        // this.setState({id})
-    })
-    .then(() => {
-        this.props.history.push("/");
-    })
-    .catch(err => {
-        console.log({ Error: err });
-    });
+// addNewEntry= e =>  {
+//     console.log(e)
+//     e.preventDefault();
+//     const endpoint = 'https://one-line-a-day-2.herokuapp.com/api/users/userID/entries';
+//     axios
+//     .post(endpoint)
+//     .then(res => {
+//         localStorage.getItem("jwt", res.data.token);
+//         // this.setState({id})
+//     })
+//     .then(() => {
+//         this.props.history.push("/");
+//     })
+//     .catch(err => {
+//         console.log({ Error: err });
+//     });
     
-}
+// }
 
 // deleteEntry= e =>  {
 //     console.log(e)
@@ -144,9 +144,9 @@ addNewEntry= e =>  {
                 onChange={this.handleChanges} autoFocus />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="inputs">Input</InputLabel>
-            <Input autoComplete='off' name="inputs" type="text" id="inputs" 
-                value={this.state.inputs}
+            <InputLabel htmlFor="input">Input</InputLabel>
+            <Input autoComplete='off' name="input" type="text" id="input" 
+                value={this.state.input}
                 onChange={this.handleChanges} />
           </FormControl>
          

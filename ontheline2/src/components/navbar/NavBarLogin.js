@@ -36,9 +36,7 @@ const styles = {
 
 function NavBarLogin(props) {
 
-   const signout = () => {
-        localStorage.removeItem("jwt");
-      };
+   
   const { classes } = props;
   return (
     <div className={classes.root}>
