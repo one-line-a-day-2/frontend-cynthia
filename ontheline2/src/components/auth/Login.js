@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import {NavLink } from 'react-router-dom';
 import axios from 'axios';
 import NavBarLogin from '../navbar/NavBarLogin'
+import { login } from '../../actions'
+import { connect } from "react-redux";
 
 
 const styles = theme => ({
@@ -60,35 +61,27 @@ class LogIn extends Component {
             this.state = {
               username: '',
               password: '',
-              id: 0
+      
             }
       
        }
-       
+       componentDidUpdate(prevProps, prevState){
+        if(localStorage.getItem("jwt")){
+          this.props.history.push("/");
+        }
+      }
         handleLogin = e => {
             this.setState({[e.target.name]: e.target.value })
             console.log(e)
         }
-      
-        addLogin = e => {
-            e.preventDefault();
-            const endpoint = "https://one-line-a-day-2.herokuapp.com/api/login";
-            axios
-            .post(endpoint, this.state)
-            .then(res => {
-                this.setState({...this.state, id: res.data.id}); localStorage.setItem("jwt", res.data.token);
-              
-            })
-            .then(() => {
-                this.props.history.push("/");
-            })
-            .catch(err => {
-                console.log({ Error: err });
-            });
-            
-                }
 
-     
+        addLogin = e => {
+          e.preventDefault();
+            this.props.login({username: this.state.username, password: this.state.password});
+        };
+      
+      
+
 
   render() {
    
@@ -140,16 +133,17 @@ class LogIn extends Component {
 }
 }
 
-export default LogIn;
+const mapStateToProps = state =>  ({
+  fetchEntries: state.fetchEntries,
+  
+ 
+});
 
- // console.log(this.state)
-            // e.preventDefault();
-            // this.props.logIn(this.state)
-            // const userInfo = this.state.email;
-            // localStorage.setItem("jwt", res.data.token)
-            // window.location.reload();
-            // this.setState({
-            //     email: '',
-            //     password: ''
+
+
+export default connect(
+  mapStateToProps,
+   { login }
+ )(LogIn);
 
             

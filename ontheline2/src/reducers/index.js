@@ -1,36 +1,51 @@
-import { START, SUCCESS, FAILURE } from "../actions";
+import { LOGIN_USER_START,LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE } from "../actions";
 
 
 const initialState = {
     fetchEntries: false,
      error: null,
-    entries: [
-        // {id: 0, title: 'First Entry', input: 'Something about a journal'},
-        // {id: 1, title: 'Second Entry', input: 'Something about a journal'},
-        // {id: 2, title: 'Third Entry', input: 'Something about a journal'}
-    ]
+     userId: 0,
+    
 };
 
  const rootReducer = (state = initialState, action ) => {
     switch (action.type) {
-        case START:
-          return {
+        case LOGIN_USER_START:
+        return {
             ...state,
-              fetchEntries: true
-          };
-          case SUCCESS:
-            return {
-              ...state,
-              entries: action.payload,
-              fetchEntries: false,
-              error: null
-            };
-          case FAILURE:
-              return {
-                ...state,
-                error: action.payload,
-                fetchEntries: false
-              }
+            fetchEntries: true
+        };
+        case LOGIN_USER_SUCCESS:
+        return {
+            ...state,
+            fetchEntries: false,
+            error: false,
+            userId: action.payload
+        };
+        case LOGIN_USER_FAILURE:
+        return {
+            ...state,
+            fetchEntries: false,
+            error: action.payload
+        };
+        //     case START:
+        //     return {
+        //         ...state,
+        //         fetchEntries: true
+        //     };
+        //   case SUCCESS:
+        //     return {
+        //       ...state,
+        //       entries: action.payload,
+        //       fetchEntries: false,
+        //       error: null
+        //     };
+        //   case FAILURE:
+        //       return {
+        //         ...state,
+        //         error: action.payload,
+        //         fetchEntries: false
+        //       }
               default: 
                 return state;
     }
