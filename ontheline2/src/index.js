@@ -16,9 +16,9 @@ import {BrowserRouter as Router } from 'react-router-dom'
 //     rootReducer,
 //     applyMiddleware(thunk, logger)
 //   ); 
-// {/* <Provider store={store} > */}
-
+{/* <Provider store={store} > */}
 ReactDOM.render(
+
 <Router>
 <App />
 </Router>,

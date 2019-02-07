@@ -59,7 +59,8 @@ class LogIn extends Component {
           super(props);
             this.state = {
               username: '',
-              password: ''
+              password: '',
+              id: 0
             }
       
        }
@@ -75,7 +76,7 @@ class LogIn extends Component {
             axios
             .post(endpoint, this.state)
             .then(res => {
-                const id = res.data.id; localStorage.setItem("jwt", res.data.token);
+                this.setState({...this.state, id: res.data.id}); localStorage.setItem("jwt", res.data.token);
               
             })
             .then(() => {
@@ -150,3 +151,5 @@ export default LogIn;
             // this.setState({
             //     email: '',
             //     password: ''
+
+            

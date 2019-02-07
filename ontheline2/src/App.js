@@ -14,7 +14,18 @@ import axios from 'axios';
 
 
 class App extends Component {
- 
+  constructor(props) {
+  super(props);
+  this.state = {
+    username: '',
+    password: '',
+    id: 0
+  }
+
+}
+
+
+
 
   render() {
     return (
