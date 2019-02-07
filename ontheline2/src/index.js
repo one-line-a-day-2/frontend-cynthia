@@ -16,13 +16,13 @@ const store = createStore(
     rootReducer,
     applyMiddleware(thunk, logger)
   ); 
-
+ 
 ReactDOM.render(
-<Provider store={store} >
+<Provider store={store} > 
 <Router>
 <App />
 </Router>
-</Provider>, 
+ </Provider>,
 document.getElementById('root'));
 
 

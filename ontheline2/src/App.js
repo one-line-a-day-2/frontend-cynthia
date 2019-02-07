@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-
 import './App.css';
-import { connect } from "react-redux";
-import Login from './components/Login'
-import { Route } from 'react-router-dom'
-import { } from './actions';
 
+
+import LogIn from './components/auth/Login'
+import SignUp from './components/auth/SignUp'
+import HomePage from './components/homepage/HomePage'
+import { fetchEntry } from './actions';
+import { Route } from 'react-router-dom'
+import { connect } from "react-redux";
+import JournalEntry from './components/homepage/JournalEntry';
 
 
 
@@ -13,23 +16,22 @@ import { } from './actions';
 class App extends Component {
   constructor(props){
     super(props); 
-  
-    
-    
   }
-
-    componentDidMount() {
-
-    }
-
+  
+componentDidMount() {
+  this.props.fetchEntry();
+  console.log(this.props.fetchEntry())
+}
 
 
   render() {
     return (
       <div className="App">
-      <h1>One-Line-a-DayII</h1>
-      <Route path='/login' component={Login} />
-      {/* <Route path='/' component={HomePage} /> */}
+      <Route  exact path='/' entries={this.props.entries} component={HomePage}  />
+      <Route path='/login' component={LogIn} />
+      <Route path='/signup' component={SignUp} />
+      <Route path='/journalentry' component={JournalEntry} />
+     
 
 
       
@@ -38,16 +40,21 @@ class App extends Component {
   }
 }
 
+
+
+
+
+
 const mapStateToProps = state =>  ({
+  entries: state.entries,
+  fetchingEntry: state.fetchingEntry,
   
-    
-   
-  });
+ 
+});
 
 
 
 export default connect(
   mapStateToProps,
-   {  }
+   { fetchEntry }
  )(App);
- 

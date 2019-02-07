@@ -1,0 +1,4 @@
+[build]
+    base = 'ontheline2/'
+    publish = 'ontheline2/build/'
+    command = 'yarn build'
