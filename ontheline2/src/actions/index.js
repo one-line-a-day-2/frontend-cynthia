@@ -16,7 +16,7 @@ export const fetchEntry = id => dispatch => {
     dispatch({ type: START });
     axios.get(`https://one-line-a-day-2.herokuapp.com/api/users/${id}/entries`,{ headers: 
         {Authorization: localStorage.getItem("jwt") }}) 
-    .then(res => dispatch({ type: SUCCESS, payload: res.data.token }))
+    .then(res => dispatch({ type: SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: FAILURE, payload: err }))
 
 }

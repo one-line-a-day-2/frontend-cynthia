@@ -5,9 +5,9 @@ const initialState = {
     fetchEntries: false,
      error: null,
     entries: [
-        {id: 0, title: 'First Entry', input: 'Something about a journal'},
-        {id: 1, title: 'Second Entry', input: 'Something about a journal'},
-        {id: 2, title: 'Third Entry', input: 'Something about a journal'}
+        // {id: 0, title: 'First Entry', input: 'Something about a journal'},
+        // {id: 1, title: 'Second Entry', input: 'Something about a journal'},
+        // {id: 2, title: 'Third Entry', input: 'Something about a journal'}
     ]
 };
 
@@ -35,5 +35,5 @@ const initialState = {
                 return state;
     }
  }
- 
+
 export default rootReducer;

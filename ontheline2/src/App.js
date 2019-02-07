@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-// import { connect } from "react-redux";
+
 import LogIn from './components/auth/Login'
 import SignUp from './components/auth/SignUp'
 import HomePage from './components/homepage/HomePage'

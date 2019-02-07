@@ -7,9 +7,9 @@ const HomePage = props => {
     return (
       <div className="cards">
       <NavBar />
-        {props.entries.map(entry => {
+        {/* {props.entries.map(entry => {
           return <Entry  key={entry.id} entry={entry}  />;
-        })}
+        })} */}
       </div>
     );
   };
