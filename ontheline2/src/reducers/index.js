@@ -14,6 +14,7 @@ const initialState = {
     fetchEntries: false,
      error: null,
      userId: 0,
+     entries: []
     
 };
 

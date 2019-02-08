@@ -9,14 +9,14 @@ class HomePage extends Component {
 
 
 componentDidMount() {
-    this.props.fetchEntry();
+    this.props.fetchEntry(this.props.userId);
 }
 
     render() {
         return (
         <div className="cards">
         <NavBar />
-            <Entry entries={this.props.entries}/>
+        <Entry entries={this.props.entries}/>
         </div>
     );
   };
@@ -26,7 +26,8 @@ componentDidMount() {
 const mapStateToProps = state => {
     return {
         fetchEntries: state.fetchEntries,
-        entries: state.entries
+        entries: state.entries,
+        userId: state.userId
     }
 }
  export default connect(mapStateToProps, 
