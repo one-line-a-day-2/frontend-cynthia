@@ -4,7 +4,13 @@ import
   LOGIN_USER_FAILURE, 
   ENTRY_START, 
   ENTRY_SUCCESS,
-  ENTRY_FAILURE 
+  ENTRY_FAILURE,
+  ENTRY_ADD_START,
+  ENTRY_ADD_SUCCESS,
+  ENTRY_ADD_FAILURE,
+  ENTRY_DELETE_START,
+  ENTRY_DELETE_SUCCESS,
+  ENTRY_DELETE_FAILURE
 } 
 from "../actions";
 
@@ -56,6 +62,40 @@ const initialState = {
                 error: action.payload,
                 fetchEntries: false
               }
+        case ENTRY_ADD_START:
+            return {
+                ...state,
+                    fetchEntries: true
+                };
+        case ENTRY_ADD_SUCCESS:
+                return {
+                ...state,
+                fetchEntries: false,
+                error: null
+                };
+        case ENTRY_ADD_FAILURE:
+                return {
+                    ...state,
+                    error: action.payload,
+                    fetchEntries: false
+                }
+        case ENTRY_DELETE_START:
+                return {
+                    ...state,
+                     fetchEntries: true
+                        };
+        case ENTRY_DELETE_SUCCESS:
+                return {
+                    ...state,
+                    fetchEntries: false,
+                     error: null
+                        };
+        case ENTRY_DELETE_FAILURE:
+                return {
+                     ...state,
+                      error: action.payload,
+                      fetchEntries: false
+                        }
               default: 
                 return state;
     }

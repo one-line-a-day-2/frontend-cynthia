@@ -4,15 +4,17 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import axios from 'axios';
+// import axios from 'axios';
 import NavBar from '../navbar/NavBar'
+import {addNewEntry, fetchEntry} from '../../actions'
+import { connect } from "react-redux";
 
 const styles = theme => ({
   main: {
@@ -53,7 +55,6 @@ class JournalEntry extends Component {
           super(props);
             this.state = {
               entry: '',
-              input: '',
               
             }
       
@@ -65,6 +66,16 @@ class JournalEntry extends Component {
     [e.target.name]: e.target.value
 })
 }   
+
+addEntry = e => {
+  e.preventDefault();
+  this.props.addNewEntry(this.props.userId, {
+    entry: this.state.entry,
+    user_id: this.props.userId
+  });
+  this.props.fetchEntry();
+  this.props.history.push("/");
+}
 
 
 
@@ -80,19 +91,15 @@ class JournalEntry extends Component {
         <Typography component="h1" variant="h5" >
           Journal Entry
         </Typography>
-        <form className={styles.form} onSubmit={this.addNewEntry} >
+
+        <form className={styles.form} onSubmit={this.addEntry} >
           <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="entry">Title</InputLabel>
+            <InputLabel htmlFor="entry">Start your daily entry...</InputLabel>
             <Input autoComplete='off' id="entry" name="entry" type="text" 
                 value={this.state.entry}
                 onChange={this.handleChanges} autoFocus />
           </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="input">Input</InputLabel>
-            <Input autoComplete='off' name="input" type="text" id="input" 
-                value={this.state.input}
-                onChange={this.handleChanges} />
-          </FormControl>
+        
          
           <Button
             type="submit"
@@ -110,4 +117,13 @@ class JournalEntry extends Component {
 }
 }
 
-export default JournalEntry;
+const mapStateToProps = state => {
+  return {
+      fetchEntries: state.fetchEntries,
+      entries: state.entries,
+      userId: state.userId
+  }
+}
+export default connect(mapStateToProps, 
+  {addNewEntry, fetchEntry})
+  (JournalEntry)
