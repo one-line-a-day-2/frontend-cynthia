@@ -1,17 +1,41 @@
 import React, { Component } from 'react'
 import NavBar from '../navbar/NavBar'
 import Entry from '../homepage/Entry'
+import { connect } from 'react-redux';
+import { fetchEntry, deleteEntry } from '../../actions'
 
 
-const HomePage = props => {
-    return (
-      <div className="cards">
-      <NavBar />
-        {/* {props.entries.map(entry => {
-          return <Entry  key={entry.id} entry={entry}  />;
-        })} */}
-      </div>
+class HomePage extends Component {
+
+
+componentDidMount() {
+    this.props.fetchEntry(this.props.userId);
+}
+
+deleteEntry = e => {
+    e.preventDefault();
+    this.props.deleteEntry(this.props.match.params.userId);
+  }
+  
+
+    render() {
+        return (
+        <div className="cards">
+        <NavBar />
+        <Entry entries={this.props.entries}  deleteEntry={this.deleteEntry}/>
+        </div>
     );
   };
-  
-  export default HomePage;
+}
+
+
+const mapStateToProps = state => {
+    return {
+        fetchEntries: state.fetchEntries,
+        entries: state.entries,
+        userId: state.userId
+    }
+}
+ export default connect(mapStateToProps, 
+    {fetchEntry, deleteEntry})
+    (HomePage)
