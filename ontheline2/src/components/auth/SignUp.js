@@ -59,6 +59,7 @@ class SignUp extends Component {
             }
       
        }
+       
        handleSignUp = e => {
                 this.setState({[e.target.name]: e.target.value })
                 console.log(e)
@@ -73,7 +74,7 @@ class SignUp extends Component {
                 console.log(res);
               })
               .then(() => {
-                this.props.history.push("/");
+                this.props.history.push("/login");
               })
               .catch(err => {
                 console.log({ Error: err });

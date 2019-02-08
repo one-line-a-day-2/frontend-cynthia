@@ -34,6 +34,7 @@ export const login = logins => dispatch => {
       .catch(err => dispatch({ type: LOGIN_USER_FAILURE, payload: err }));
   };
 
+  
 ///////////////////// FETCH ACTION /////////////////
 //this will display an entry to the homepage
 

@@ -10,7 +10,7 @@ import
   ENTRY_ADD_FAILURE,
   ENTRY_DELETE_START,
   ENTRY_DELETE_SUCCESS,
-  ENTRY_DELETE_FAILURE
+  ENTRY_DELETE_FAILURE,
 } 
 from "../actions";
 
@@ -20,7 +20,8 @@ const initialState = {
     fetchEntries: false,
      error: null,
      userId: 0,
-     entries: []
+     entries: [],
+     deleteEntries: false,
     
 };
 
@@ -83,7 +84,7 @@ const initialState = {
                 return {
                     ...state,
                      fetchEntries: true
-                        };
+                    };
         case ENTRY_DELETE_SUCCESS:
                 return {
                     ...state,

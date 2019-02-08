@@ -68,11 +68,13 @@ class JournalEntry extends Component {
 }   
 
 addEntry = e => {
+  console.log(addNewEntry)
   e.preventDefault();
   this.props.addNewEntry(this.props.userId, {
     entry: this.state.entry,
     user_id: this.props.userId
   });
+  this.setState({entry: ''})
   this.props.fetchEntry();
   this.props.history.push("/");
 }
