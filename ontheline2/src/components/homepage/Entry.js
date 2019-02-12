@@ -42,10 +42,14 @@ function Entry(props) {
 
         
         {props.entries.map( entry => {
-                return <p key={entry.id} > {entry.entry}</p>
-            })}
-        <i className="fas fa-user-edit"></i>
-       <i onClick={(e) => props.deleteEntry(e, props.entries.id)} className="fas fa-trash-alt"></i>
+                return (
+                <div> 
+                  <p key={entry.id} > {entry.entry}</p> 
+                <i className="fas fa-user-edit"></i>
+                 <i onClick={e => props.deleteEntry(e, entry.id)} className="fas fa-trash-alt"></i>  
+                  </div>
+        )})}
+        
       </CardContent>
     </Card>
   );

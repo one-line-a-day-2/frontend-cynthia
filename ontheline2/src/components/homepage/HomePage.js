@@ -12,9 +12,9 @@ componentDidMount() {
     this.props.fetchEntry(this.props.userId);
 }
 
-deleteEntry = (e, id) => {
+deleteEntry = (e , entryId) => {
     e.preventDefault();
-    this.props.deleteEntry(id, this.props.userId)
+    this.props.deleteEntry(this.props.userId, entryId)
   }
   
 
@@ -33,7 +33,8 @@ const mapStateToProps = state => {
     return {
         fetchEntries: state.fetchEntries,
         entries: state.entries,
-        userId: state.userId
+        userId: state.userId,
+        deleteEntries: state.deleteEntries
     }
 }
  export default connect(mapStateToProps, 

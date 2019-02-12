@@ -16,6 +16,10 @@ export const ENTRY_DELETE_START = 'ENTRY_DELETE_START';
 export const ENTRY_DELETE_SUCCESS = 'ENTRY_DELETE_SUCCESS';
 export const ENTRY_DELETE_FAILURE = 'ENTRY_DELETE_FAILURE';
 
+export const ENTRY_EDIT_START = 'ENTRY_EDIT_START';
+export const ENTRY_EDIT_SUCCESS = 'ENTRY_EDIT_SUCCESS';
+export const ENTRY_EDIT_FAILURE = 'ENTRY_EDIT_FAILURE';
+
 ///////////////////// LOGIN ACTION /////////////////
 
 export const login = logins => dispatch => {
@@ -74,40 +78,43 @@ export const addNewEntry = (userID, enter) => dispatch => {
 
     ///////////////////// DELETE ACTION /////////////////
 
-    export const deleteEntry = ( userID ) => dispatch => {
+    export const deleteEntry = ( userID, entryID) => dispatch => {
         dispatch({ type: ENTRY_DELETE_START });
         const token = localStorage.getItem('jwt');
-        const deleteEntry = {
+        const deleteE = {
             headers: {
                 Authorization: token
             }
         };
-        axios.delete(`https://one-line-a-day-2.herokuapp.com/api/users/${userID}`, deleteEntry
-       
-        )
-        .then(res => { dispatch({ type: ENTRY_DELETE_SUCCESS, payload: res.data });
+        axios.delete(`https://one-line-a-day-2.herokuapp.com/api/users/${userID}/entries/${entryID}`, deleteE)
+        .then(res => { dispatch({ type: ENTRY_DELETE_SUCCESS, payload: entryID});
         }) 
         .catch(err => dispatch({ type: ENTRY_DELETE_FAILURE, payload: err}));
     };
 
+///////////////////// EDIT ACTION /////////////////
 
+    // export const editEntry = (userID, entryID, edit) => dispatch => {
+    //     dispatch({ type: ENTRY_EDIT_START });
+    //     const token = localStorage.getItem("jwt");
+    //     const edits = {
+    //       headers: {
+    //         Authorization: token
+    //       }
+    //     };
+    //     axios
+    //       .put(
+    //         `https://one-line-a-day-2.herokuapp.com/api/users/${userID}/entries/${entryID}`,
+    //         edit,
+    //         edits
+    //       )
+    //       .then(res => {
+    //         console.log(res);
+    //         dispatch({
+    //           type: ENTRY_EDIT_SUCCESS,
+    //           payload: res.data
+    //         });
+    //       })
+    //       .catch(err => dispatch({ type: ENTRY_EDIT_FAILURE, payload: err }));
+    //   };
 
-
-// editEntry= e =>  {
-//     console.log(e)
-//     e.preventDefault();
-//     const endpoint = 'https://one-line-a-day-2.herokuapp.com//api/users/userID/entries/entryID';
-//     axios
-//     .put(endpoint)
-//     .then(res => {
-//         localStorage.setItem("jwt", res.data.token);
-//         // this.setState({id})
-//     })
-//     .then(() => {
-//         this.props.history.push("/");
-//     })
-//     .catch(err => {
-//         console.log({ Error: err });
-//     });
-    
-// }

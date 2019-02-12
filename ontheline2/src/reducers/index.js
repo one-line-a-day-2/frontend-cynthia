@@ -83,19 +83,20 @@ const initialState = {
         case ENTRY_DELETE_START:
                 return {
                     ...state,
-                     fetchEntries: true
+                    deleteEntries: true
                     };
         case ENTRY_DELETE_SUCCESS:
                 return {
                     ...state,
-                    fetchEntries: false,
-                     error: null
+                    deleteEntries: false,
+                     error: null,
+                     entries: state.entries.filter(entry => action.id !== entry.id )
                         };
         case ENTRY_DELETE_FAILURE:
                 return {
                      ...state,
                       error: action.payload,
-                      fetchEntries: false
+                      deleteEntries: false
                         }
               default: 
                 return state;
@@ -104,43 +105,3 @@ const initialState = {
 
 export default rootReducer;
 
-
-// case ADD_FRIENDS:
-//               return {
-//                   ...state,
-//                   fetchingFriends: true
-//               }
-//         case ADD_SUCCESS:
-//               return {
-//                   ...state,
-//                   fetchingFriends: false,
-//                   error: null,
-//                   friends: action.payload
-                
-//               }
-//               case ADD_FAILURE:
-//               return {
-//                 ...state,
-//                 error: action.payload,
-//                 fetchingFriends: false
-//               }
-//               case DELETE_FRIENDS:
-//               return {
-//                   ...state,
-//                   deleteFriends: true,
-//                 //   fetchingFriends: true, //might change
-//               }
-//               case DELETE_SUCCESS:
-//               return {
-//                   ...state,
-//                   fetchingFriends: false,
-//                   error: null,
-//                   friends: action.payload
-                
-//               }
-//               case DELETE_FAILURE:
-//               return {
-//                 ...state,
-//                 error: action.payload,
-//                 fetchingFriends: false
-//               }
