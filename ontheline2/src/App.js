@@ -5,8 +5,9 @@ import './App.css';
 import LogIn from './components/auth/Login'
 import SignUp from './components/auth/SignUp'
 import HomePage from './components/homepage/HomePage'
+import JournalEntry from './components/homepage/JournalEntry'
 import { Route } from 'react-router-dom'
-import JournalEntry from './components/homepage/JournalEntry';
+
 
 
 

@@ -133,5 +133,5 @@ const mapStateToProps = state => {
   }
 }
 export default connect(mapStateToProps, 
-  {addNewEntry, editEntry, fetchEntry})
+  {addNewEntry, editEntry,fetchEntry})
   (JournalEntry)
