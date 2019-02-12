@@ -13,7 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 // import axios from 'axios';
 import NavBar from '../navbar/NavBar'
-import {addNewEntry, fetchEntry} from '../../actions'
+import {addNewEntry, editEntry, fetchEntry} from '../../actions'
 import { connect } from "react-redux";
 
 const styles = theme => ({
@@ -68,16 +68,22 @@ class JournalEntry extends Component {
 }   
 
 addEntry = e => {
-  console.log(addNewEntry)
   e.preventDefault();
+ if (this.props.edit) {
+  this.props.editEntry(this.props.userId, this.props.match.params.entryId, {
+    entry: this.state.entry,
+    user_id: this.props.userId
+  });
+} else {
   this.props.addNewEntry(this.props.userId, {
     entry: this.state.entry,
-    userId: this.props.userId
+    user_id: this.props.userId
   });
-  
-  this.props.fetchEntry();
-  this.props.history.push("/");
 }
+this.props.fetchEntry();
+this.props.history.push("/");
+};
+
 
 
 
@@ -127,5 +133,5 @@ const mapStateToProps = state => {
   }
 }
 export default connect(mapStateToProps, 
-  {addNewEntry, fetchEntry})
+  {addNewEntry, editEntry, fetchEntry})
   (JournalEntry)

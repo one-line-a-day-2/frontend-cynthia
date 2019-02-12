@@ -51,7 +51,7 @@ export const fetchEntry = (userID) => dispatch => {
         }
       };
     axios.get(`https://one-line-a-day-2.herokuapp.com/api/users/${userID}/entries`, entry) 
-    .then( res => { dispatch({ type:  ENTRY_SUCCESS, payload: res.data }) 
+    .then( res => { dispatch({ type:  ENTRY_SUCCESS, payload: res.data,userID }) 
     })
     .catch(err => dispatch({ type: ENTRY_FAILURE, payload: err }))
 }
@@ -94,27 +94,27 @@ export const addNewEntry = (userID, enter) => dispatch => {
 
 ///////////////////// EDIT ACTION /////////////////
 
-    // export const editEntry = (userID, entryID, edit) => dispatch => {
-    //     dispatch({ type: ENTRY_EDIT_START });
-    //     const token = localStorage.getItem("jwt");
-    //     const edits = {
-    //       headers: {
-    //         Authorization: token
-    //       }
-    //     };
-    //     axios
-    //       .put(
-    //         `https://one-line-a-day-2.herokuapp.com/api/users/${userID}/entries/${entryID}`,
-    //         edit,
-    //         edits
-    //       )
-    //       .then(res => {
-    //         console.log(res);
-    //         dispatch({
-    //           type: ENTRY_EDIT_SUCCESS,
-    //           payload: res.data
-    //         });
-    //       })
-    //       .catch(err => dispatch({ type: ENTRY_EDIT_FAILURE, payload: err }));
-    //   };
+    export const editEntry = (userID, entryID, edit) => dispatch => {
+        dispatch({ type: ENTRY_EDIT_START });
+        const token = localStorage.getItem("jwt");
+        const edits = {
+          headers: {
+            Authorization: token
+          }
+        };
+        axios
+          .put(
+            `https://one-line-a-day-2.herokuapp.com/api/users/${userID}/entries/${entryID}`,
+            edit,
+            edits
+          )
+          .then(res => {
+            console.log(res);
+            dispatch({
+              type: ENTRY_EDIT_SUCCESS,
+              payload: res.data
+            });
+          })
+          .catch(err => dispatch({ type: ENTRY_EDIT_FAILURE, payload: err }));
+      };
 

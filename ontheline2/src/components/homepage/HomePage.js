@@ -22,7 +22,7 @@ deleteEntry = (e , entryId) => {
         return (
         <div className="cards">
         <NavBar />
-        <Entry entries={this.props.entries}  deleteEntry={this.deleteEntry}/>
+        <Entry entries={this.props.entries} addEntry={this.addEntry} deleteEntry={this.deleteEntry}/>
         </div>
     );
   };

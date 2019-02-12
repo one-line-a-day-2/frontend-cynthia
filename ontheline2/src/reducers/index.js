@@ -11,6 +11,9 @@ import
   ENTRY_DELETE_START,
   ENTRY_DELETE_SUCCESS,
   ENTRY_DELETE_FAILURE,
+  ENTRY_EDIT_START,
+  ENTRY_EDIT_SUCCESS,
+  ENTRY_EDIT_FAILURE
 } 
 from "../actions";
 
@@ -91,6 +94,7 @@ const initialState = {
                     deleteEntries: false,
                      error: null,
                      entries: state.entries.filter(entry => action.id !== entry.id )
+                    // entries: action.payload
                         };
         case ENTRY_DELETE_FAILURE:
                 return {
@@ -98,6 +102,23 @@ const initialState = {
                       error: action.payload,
                       deleteEntries: false
                         }
+        case ENTRY_EDIT_START:
+                return {
+                    ...state,
+                    fetchEntries: true
+                }
+        case ENTRY_EDIT_SUCCESS:
+                return {
+                    ...state,
+                    fetchEntries: false,
+                    error: false
+                }
+        case ENTRY_EDIT_FAILURE: 
+                return {
+                    ...state,
+                    fetchEntries: false,
+                    error: action.payload
+                }
               default: 
                 return state;
     }
