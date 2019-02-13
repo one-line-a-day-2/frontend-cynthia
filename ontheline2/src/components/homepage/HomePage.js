@@ -21,7 +21,7 @@ deleteEntry = (e , entryId) => {
     this.props.deleteEntry(this.props.userId, entryId)
   }
   
-  editEntry = ( e, entryId ) => {
+  editEntry = ( entryId ) => {
     //   e.preventDefault();
       this.props.editEntry(this.props.userId, entryId, {
       entry: this.props.entry,

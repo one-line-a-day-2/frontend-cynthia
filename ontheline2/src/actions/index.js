@@ -20,6 +20,8 @@ export const ENTRY_EDIT_START = 'ENTRY_EDIT_START';
 export const ENTRY_EDIT_SUCCESS = 'ENTRY_EDIT_SUCCESS';
 export const ENTRY_EDIT_FAILURE = 'ENTRY_EDIT_FAILURE';
 
+
+export const NOTE_TO_UPDATE = 'NOTE_TO_UPDATE';
 ///////////////////// LOGIN ACTION /////////////////
 
 export const login = logins => dispatch => {
@@ -93,6 +95,11 @@ export const addNewEntry = (userID, enter) => dispatch => {
     };
 
 ///////////////////// EDIT ACTION /////////////////
+
+// export const noteToUpdate = (id) => {
+//   return { type: NOTE_TO_UPDATE, payload: id}
+// }
+
 
     export const editEntry = (userID, entryID, edit) => dispatch => {
         dispatch({ type: ENTRY_EDIT_START });

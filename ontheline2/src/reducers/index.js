@@ -13,7 +13,8 @@ import
   ENTRY_DELETE_FAILURE,
   ENTRY_EDIT_START,
   ENTRY_EDIT_SUCCESS,
-  ENTRY_EDIT_FAILURE
+  ENTRY_EDIT_FAILURE,
+//   NOTE_TO_UPDATE,
 } 
 from "../actions";
 
@@ -25,7 +26,8 @@ const initialState = {
      userId: 0,
      entries: [],
      deleteEntries: false,
-     isEditing: false
+     isEditing: false,
+     noteToUpdate: null 
     
 };
 
@@ -103,6 +105,12 @@ const initialState = {
                       error: action.payload,
                       deleteEntries: false
                         }
+        // case NOTE_TO_UPDATE: 
+        //     const entry = state.entries.find(entry => entry.id === action.payload)
+        //         return {
+        //             ...state,
+        //             noteToUpdate: entry
+        //         }
         case ENTRY_EDIT_START:
                 return {
                     ...state,
@@ -114,7 +122,8 @@ const initialState = {
                     ...state,
                     fetchEntries: false,
                     error: false,
-                    isEditing: false
+                    isEditing: false,
+                    entries: action.payload
                 }
         case ENTRY_EDIT_FAILURE: 
                 return {
