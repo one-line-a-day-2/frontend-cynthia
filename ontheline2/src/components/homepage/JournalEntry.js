@@ -69,11 +69,8 @@ class JournalEntry extends Component {
 
 addEntry = e => {
   e.preventDefault();
- if (this.props.edit) {
-  this.props.editEntry(this.props.userId, this.props.match.params.entryId, {
-    entry: this.state.entry,
-    user_id: this.props.userId
-  });
+ if (this.props.isEditing === true) {
+  this.props.editEntry()
 } else {
   this.props.addNewEntry(this.props.userId, {
     entry: this.state.entry,
@@ -129,7 +126,8 @@ const mapStateToProps = state => {
   return {
       fetchEntries: state.fetchEntries,
       entries: state.entries,
-      userId: state.userId
+      userId: state.userId,
+      isEditing: state.isEditing
   }
 }
 export default connect(mapStateToProps, 

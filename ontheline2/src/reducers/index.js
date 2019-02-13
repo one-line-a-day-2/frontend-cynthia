@@ -25,6 +25,7 @@ const initialState = {
      userId: 0,
      entries: [],
      deleteEntries: false,
+     isEditing: false
     
 };
 
@@ -105,19 +106,22 @@ const initialState = {
         case ENTRY_EDIT_START:
                 return {
                     ...state,
-                    fetchEntries: true
+                    fetchEntries: true,
+                    isEditing: true
                 }
         case ENTRY_EDIT_SUCCESS:
                 return {
                     ...state,
                     fetchEntries: false,
-                    error: false
+                    error: false,
+                    isEditing: false
                 }
         case ENTRY_EDIT_FAILURE: 
                 return {
                     ...state,
                     fetchEntries: false,
-                    error: action.payload
+                    error: action.payload,
+                    isEditing: false
                 }
               default: 
                 return state;
