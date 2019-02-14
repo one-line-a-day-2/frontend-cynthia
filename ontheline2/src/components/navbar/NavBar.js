@@ -53,7 +53,7 @@ function NavBar(props) {
           One-Line-a-Day-II
           </Typography>
           <NavLink style={{ color: 'white', textDecoration: 'none', padding: '10px' }} to='/' color="inherit">Home</NavLink>
-          <NavLink style={{ color: 'white', textDecoration: 'none', padding: '10px' }} to='/journalentry' color="inherit">Journal Entry</NavLink>
+          {/* <NavLink style={{ color: 'white', textDecoration: 'none', padding: '10px' }} to='/journalentry' color="inherit">Journal Entry</NavLink> */}
           <NavLink style={{ color: 'white', textDecoration: 'none', padding: '10px' }} to="/login" exact onClick={signout}>Sign Out</NavLink>
         </Toolbar>
       </AppBar>

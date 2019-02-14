@@ -29,7 +29,7 @@ export const login = logins => dispatch => {
     axios
       .post("https://one-line-a-day-2.herokuapp.com/api/login", logins)
       .then(res => {
-        console.log(res);
+       
         localStorage.setItem("jwt", res.data.token);
         dispatch({
           type: LOGIN_USER_SUCCESS,
@@ -53,7 +53,7 @@ export const fetchEntry = (userID) => dispatch => {
         }
       };
     axios.get(`https://one-line-a-day-2.herokuapp.com/api/users/${userID}/entries`, entry) 
-    .then( res => { dispatch({ type:  ENTRY_SUCCESS, payload: res.data,userID }) 
+    .then( res => { dispatch({ type:  ENTRY_SUCCESS, payload: res.data }) 
     })
     .catch(err => dispatch({ type: ENTRY_FAILURE, payload: err }))
 }
@@ -72,7 +72,9 @@ export const addNewEntry = (userID, enter) => dispatch => {
         enter, 
         add
         )
-        .then(res => { dispatch({ type: ENTRY_ADD_SUCCESS, payload: res.data });
+        .then(res => {
+          
+          return dispatch({ type: ENTRY_ADD_SUCCESS, payload: res.data.fields });
         }) 
         .catch(err => dispatch({ type: ENTRY_ADD_FAILURE, payload: err}));
     };
@@ -116,7 +118,7 @@ export const addNewEntry = (userID, enter) => dispatch => {
             edits
           )
           .then(res => {
-            console.log(res);
+
             dispatch({
               type: ENTRY_EDIT_SUCCESS,
               payload: res.data
