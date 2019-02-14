@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -45,7 +45,7 @@ function Entry(props) {
                 return (
                 <div> 
                   <p key={entry.id} > {entry.entry}</p> 
-                <i onClick={() => props.editEntry(entry.user_id, entry.id)}className="fas fa-user-edit"></i>
+                <i onClick={() => props.editEntry(entry.userid, entry.id)}className="fas fa-user-edit"></i>
                  <i onClick={e => props.deleteEntry(e, entry.id)} className="fas fa-trash-alt"></i>  
                   </div>
         )})}

@@ -18,8 +18,10 @@ class HomePage extends Component {
 componentDidMount() {
     this.props.fetchEntry(this.props.userId);
 }
+
 handleChanges = e => {
     this.setState({
+        ...this.state,
       [e.target.name]: e.target.value
     });
   };
@@ -39,13 +41,14 @@ deleteEntry = (e , entryId) => {
   
   editEntry =  entryId  => {
     //   e.preventDefault();
+      const updateEntry = this.props.entries.find(entry => entry.id === entryId )
       this.props.editEntry(this.props.userId, entryId, {
-      entry: this.props.entry,
-      user_id: this.props.userId
+      entry: this.state.entry,
+      user_id: this.props.userId,
       })
      
-    this.setState({ entry: '', user_id: 0, isUpdating: false });
-    this.props.fetchEntry();
+    this.setState({ entry: updateEntry, isUpdating: false });
+    // this.props.fetchEntry();
 }
   
 
@@ -55,7 +58,7 @@ deleteEntry = (e , entryId) => {
         return (
         <div className="cards">
             <NavBar />
-            <JournalForm  handleChanges={this.handleChanges} addEntry={this.addEntry} />
+            <JournalForm  handleChanges={this.handleChanges} isUpdating={this.isUpdating} addEntry={this.addEntry} />
             <Entry entries={this.props.entries} editEntry={this.editEntry}  deleteEntry={this.deleteEntry}/>
         </div>
     );
@@ -70,7 +73,7 @@ const mapStateToProps = state => {
         userId: state.userId,
         deleteEntries: state.deleteEntries,
         editEntry: state.editEntry,
-        isEditing: state.isEditing
+        isUpdating: state.isUpdating
     }
 }
  export default connect(mapStateToProps, 

@@ -100,7 +100,7 @@ const initialState = {
                     deleteEntries: false,
                      error: null,
                      entries: state.entries.filter(entry => action.id !== entry.id )
-                    // entries: action.payload
+                    
                         };
         case ENTRY_DELETE_FAILURE:
                 return {
@@ -113,14 +113,14 @@ const initialState = {
                 return {
                     ...state,
                     fetchEntries: true,
-                    isEditing: true
+                    isUpdating: true
                 }
         case ENTRY_EDIT_SUCCESS:
                 return {
                     ...state,
                     fetchEntries: false,
                     error: false,
-                    isEditing: false,
+                    isUpdating: false,
                     entries: action.payload
                 }
         case ENTRY_EDIT_FAILURE: 
@@ -128,7 +128,7 @@ const initialState = {
                     ...state,
                     fetchEntries: false,
                     error: action.payload,
-                    isEditing: false
+                    isUpdating: false
                 }
               default: 
                 return state;

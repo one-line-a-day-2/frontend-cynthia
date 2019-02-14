@@ -98,9 +98,7 @@ export const addNewEntry = (userID, enter) => dispatch => {
 
 ///////////////////// EDIT ACTION /////////////////
 
-// export const noteToUpdate = (id) => {
-//   return { type: NOTE_TO_UPDATE, payload: id}
-// }
+
 
 
     export const editEntry = (userID, entryID, edit) => dispatch => {

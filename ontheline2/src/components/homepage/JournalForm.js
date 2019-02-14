@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-// import axios from 'axios';
-// import NavBar from '../navbar/NavBar'
-// import {addNewEntry, editEntry, fetchEntry} from '../../actions'
-// import { connect } from "react-redux";
+
 
 const styles = theme => ({
   main: {
@@ -63,7 +57,7 @@ function JournalForm(props) {
        
    
   return ( 
-    //   const {classes } = props;
+ 
     <main className={styles.main}>
      {/* <NavBar /> */}
       <CssBaseline />
@@ -90,7 +84,7 @@ function JournalForm(props) {
             color="primary"
             className={styles.submit}
           >
-            {props.isUpdating? 'Update Entry' : 'Add Entry'}
+            {props.isUpdating ? 'Update Entry' : 'Add Entry'}
           </Button>
         </form>
       </Paper>
@@ -100,14 +94,3 @@ function JournalForm(props) {
 
 export default JournalForm;
 
-// const mapStateToProps = state => {
-//   return {
-//       fetchEntries: state.fetchEntries,
-//       entries: state.entries,
-//       userId: state.userId,
-//       isEditing: state.isEditing
-//   }
-// }
-// export default connect(mapStateToProps, 
-//   {addNewEntry, editEntry,fetchEntry})
-//   (JournalEntry)
