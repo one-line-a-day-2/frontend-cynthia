@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 export const LOGIN_USER_START= 'LOGIN_USER_START';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
@@ -16,6 +17,12 @@ export const ENTRY_DELETE_START = 'ENTRY_DELETE_START';
 export const ENTRY_DELETE_SUCCESS = 'ENTRY_DELETE_SUCCESS';
 export const ENTRY_DELETE_FAILURE = 'ENTRY_DELETE_FAILURE';
 
+export const ENTRY_EDIT_START = 'ENTRY_EDIT_START';
+export const ENTRY_EDIT_SUCCESS = 'ENTRY_EDIT_SUCCESS';
+export const ENTRY_EDIT_FAILURE = 'ENTRY_EDIT_FAILURE';
+
+
+export const NOTE_TO_UPDATE = 'NOTE_TO_UPDATE';
 ///////////////////// LOGIN ACTION /////////////////
 
 export const login = logins => dispatch => {
@@ -23,8 +30,9 @@ export const login = logins => dispatch => {
     axios
       .post("https://one-line-a-day-2.herokuapp.com/api/login", logins)
       .then(res => {
-        console.log(res);
+       
         localStorage.setItem("jwt", res.data.token);
+        localStorage.setItem('userId', res.data.id)
         dispatch({
           type: LOGIN_USER_SUCCESS,
           payload: res.data.id
@@ -34,6 +42,7 @@ export const login = logins => dispatch => {
       .catch(err => dispatch({ type: LOGIN_USER_FAILURE, payload: err }));
   };
 
+  
 ///////////////////// FETCH ACTION /////////////////
 //this will display an entry to the homepage
 
@@ -65,7 +74,9 @@ export const addNewEntry = (userID, enter) => dispatch => {
         enter, 
         add
         )
-        .then(res => { dispatch({ type: ENTRY_ADD_SUCCESS, payload: res.data });
+        .then(res => {
+          
+          return dispatch({ type: ENTRY_ADD_SUCCESS, payload: res.data.fields });
         }) 
         .catch(err => dispatch({ type: ENTRY_ADD_FAILURE, payload: err}));
     };
@@ -73,40 +84,44 @@ export const addNewEntry = (userID, enter) => dispatch => {
 
     ///////////////////// DELETE ACTION /////////////////
 
-    export const deleteEntry = ( userID ) => dispatch => {
+    export const deleteEntry = ( userID, entryID) => dispatch => {
         dispatch({ type: ENTRY_DELETE_START });
         const token = localStorage.getItem('jwt');
-        const deleteEntry = {
+        const deleteE = {
             headers: {
                 Authorization: token
             }
         };
-        axios.delete(`https://one-line-a-day-2.herokuapp.com/api/users/${userID}`, deleteEntry
-       
-        )
-        .then(res => { dispatch({ type: ENTRY_DELETE_SUCCESS, payload: res.data });
+        axios.delete(`https://one-line-a-day-2.herokuapp.com/api/users/${userID}/entries/${entryID}`, deleteE)
+        .then(res => { dispatch({ type: ENTRY_DELETE_SUCCESS, payload: entryID});
         }) 
         .catch(err => dispatch({ type: ENTRY_DELETE_FAILURE, payload: err}));
     };
 
+///////////////////// EDIT ACTION /////////////////
 
 
 
-// editEntry= e =>  {
-//     console.log(e)
-//     e.preventDefault();
-//     const endpoint = 'https://one-line-a-day-2.herokuapp.com//api/users/userID/entries/entryID';
-//     axios
-//     .put(endpoint)
-//     .then(res => {
-//         localStorage.setItem("jwt", res.data.token);
-//         // this.setState({id})
-//     })
-//     .then(() => {
-//         this.props.history.push("/");
-//     })
-//     .catch(err => {
-//         console.log({ Error: err });
-//     });
-    
-// }
+
+    export const editEntry = (userID, updatedEntry) => dispatch => {
+        dispatch({ type: ENTRY_EDIT_START });
+        const token = localStorage.getItem("jwt");
+        const editToken = {
+          headers: {
+            Authorization: token
+          } 
+        };
+        axios
+          .put(
+            `https://one-line-a-day-2.herokuapp.com/api/users/${userID}/entries/${updatedEntry.id}`,updatedEntry, editToken)
+          .then(res => {
+            dispatch({
+              type: ENTRY_EDIT_SUCCESS,
+              payload: updatedEntry
+          }) 
+        })
+          .catch(err => dispatch({ type: ENTRY_EDIT_FAILURE, payload: err }));
+      };
+
+
+      

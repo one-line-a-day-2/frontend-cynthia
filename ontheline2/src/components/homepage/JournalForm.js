@@ -1,20 +1,14 @@
-import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import React from 'react';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-// import axios from 'axios';
-import NavBar from '../navbar/NavBar'
-import {addNewEntry, fetchEntry} from '../../actions'
-import { connect } from "react-redux";
+
 
 const styles = theme => ({
   main: {
@@ -46,84 +40,58 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
+    
   },
 });
 
 
-class JournalEntry extends Component {
-        constructor(props) {
-          super(props);
-            this.state = {
-              entry: '',
-              
-            }
-      
-       }
+function JournalForm(props) {
+  const handleClick = e => {
+    e.preventDefault();
+    if (props.isEditing) {
+      props.updateEntry();
+    } else {
+      props.addEntry();
+    }
+
+  };
        
-   handleChanges = e => {
-    e.preventDefault(); 
-    this.setState({ 
-    [e.target.name]: e.target.value
-})
-}   
-
-addEntry = e => {
-  e.preventDefault();
-  this.props.addNewEntry(this.props.userId, {
-    entry: this.state.entry,
-    user_id: this.props.userId
-  });
-  this.props.fetchEntry();
-  this.props.history.push("/");
-}
-
-
-
-  render() {
    
   return ( 
-    //   const {classes } = props;
+ 
     <main className={styles.main}>
-     <NavBar />
+     {/* <NavBar /> */}
       <CssBaseline />
       <Paper className={styles.paper}  style={{margin: '50px'}} >
      
         <Typography component="h1" variant="h5" >
-          Journal Entry
+        {props.isEditing ? 'Update Entry' : 'Add Entry'}
         </Typography>
 
-        <form className={styles.form} onSubmit={this.addEntry} >
+        <form className={styles.form} onSubmit={props.addEntry} >
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="entry">Start your daily entry...</InputLabel>
             <Input autoComplete='off' id="entry" name="entry" type="text" 
-                value={this.state.entry}
-                onChange={this.handleChanges} autoFocus />
+                value={props.entry}
+                onChange={props.handleChanges} autoFocus />
           </FormControl>
         
          
           <Button
+            onClick={handleClick}
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            // color="primary"
             className={styles.submit}
           >
-            Enter
+            {props.isEditing? 'Update Entry' : 'Add Entry'}
           </Button>
         </form>
       </Paper>
     </main>
   );
 }
-}
 
-const mapStateToProps = state => {
-  return {
-      fetchEntries: state.fetchEntries,
-      entries: state.entries,
-      userId: state.userId
-  }
-}
-export default connect(mapStateToProps, 
-  {addNewEntry, fetchEntry})
-  (JournalEntry)
+export default JournalForm;
+

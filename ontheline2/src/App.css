@@ -35,3 +35,7 @@
   padding: 0 10px;
 }
 
+.cards {
+  background-image: linear-gradient(white, #59e3bb);
+  height: 1000px;
+}

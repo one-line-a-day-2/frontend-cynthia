@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {NavLink } from 'react-router-dom';
-// import Logo from './img/logo.svg';
+
 
 const styles = {
     palette: {
@@ -42,10 +42,7 @@ function NavBarLogin(props) {
     <div className={classes.root}>
       <AppBar className={classes.palette} position="static">
         <Toolbar>
-          {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton> */}
-         
+       
           <Typography variant="h6" color="inherit" className={classes.grow}>
           One-Line-a-Day-II
           </Typography>

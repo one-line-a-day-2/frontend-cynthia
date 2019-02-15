@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -31,7 +31,7 @@ const styles = {
 function Entry(props) {
   const { classes } = props;
   
-
+ 
   return (
     
     <Card className={classes.card} style={{width: '50%', margin: 'auto'}} >
@@ -42,18 +42,23 @@ function Entry(props) {
 
         
         {props.entries.map( entry => {
-                return <p key={entry.id} > {entry.entry}</p>
-            })}
-        <i className="fas fa-user-edit"></i>
-       <i onClick={(e) => props.deleteEntry(e, props.entry)} className="fas fa-trash-alt"></i>
+          
+                return (
+                <div> 
+                  <p key={entry.id} > {entry.entry}</p> 
+                <i onClick={() => props.editEntry(entry)}className="fas fa-user-edit"></i>
+                 <i onClick={e => props.deleteEntry(e, entry.id)} className="fas fa-trash-alt"></i>  
+                  </div>
+        )})}
+        
       </CardContent>
     </Card>
   );
 }
 
-Entry.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+// Entry.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default withStyles(styles)(Entry);
 

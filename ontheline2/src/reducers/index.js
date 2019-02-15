@@ -10,7 +10,11 @@ import
   ENTRY_ADD_FAILURE,
   ENTRY_DELETE_START,
   ENTRY_DELETE_SUCCESS,
-  ENTRY_DELETE_FAILURE
+  ENTRY_DELETE_FAILURE,
+  ENTRY_EDIT_START,
+  ENTRY_EDIT_SUCCESS,
+  ENTRY_EDIT_FAILURE,
+
 } 
 from "../actions";
 
@@ -19,8 +23,11 @@ const initialState = {
     fetchLogin: false,
     fetchEntries: false,
      error: null,
-     userId: 0,
-     entries: []
+     userId: localStorage.getItem('userId'),
+     entries: [],
+     deleteEntries: false,
+     isUpdating: false,
+     noteToUpdate: null 
     
 };
 
@@ -50,6 +57,7 @@ const initialState = {
                 fetchEntries: true
             };
         case ENTRY_SUCCESS:
+        
             return {
               ...state,
               entries: action.payload,
@@ -68,9 +76,11 @@ const initialState = {
                     fetchEntries: true
                 };
         case ENTRY_ADD_SUCCESS:
+       
                 return {
                 ...state,
                 fetchEntries: false,
+                entries: action.payload,
                 error: null
                 };
         case ENTRY_ADD_FAILURE:
@@ -82,20 +92,50 @@ const initialState = {
         case ENTRY_DELETE_START:
                 return {
                     ...state,
-                     fetchEntries: true
-                        };
+                    deleteEntries: true
+                    };
         case ENTRY_DELETE_SUCCESS:
                 return {
                     ...state,
-                    fetchEntries: false,
-                     error: null
+                    deleteEntries: false,
+                     error: null,
+                     entries: state.entries.filter(entry => action.id !== entry.id )
+                    
                         };
         case ENTRY_DELETE_FAILURE:
                 return {
                      ...state,
                       error: action.payload,
-                      fetchEntries: false
+                      deleteEntries: false
                         }
+    
+        case ENTRY_EDIT_START:
+                return {
+                    ...state,
+                    fetchEntries: true,
+                    isUpdating: true
+                }
+        case ENTRY_EDIT_SUCCESS:
+                return {
+                    ...state,
+                    fetchEntries: false,
+                    error: false,
+                    isUpdating: false,
+                    entries: state.entries.map(entry => { 
+                        if( entry.id === action.payload.id) {
+                            return action.payload //edited updated entry 
+                        } else {
+                            return entry
+                        }
+                    })
+                }
+        case ENTRY_EDIT_FAILURE: 
+                return {
+                    ...state,
+                    fetchEntries: false,
+                    error: action.payload,
+                    isUpdating: false
+                }
               default: 
                 return state;
     }
@@ -103,43 +143,3 @@ const initialState = {
 
 export default rootReducer;
 
-
-// case ADD_FRIENDS:
-//               return {
-//                   ...state,
-//                   fetchingFriends: true
-//               }
-//         case ADD_SUCCESS:
-//               return {
-//                   ...state,
-//                   fetchingFriends: false,
-//                   error: null,
-//                   friends: action.payload
-                
-//               }
-//               case ADD_FAILURE:
-//               return {
-//                 ...state,
-//                 error: action.payload,
-//                 fetchingFriends: false
-//               }
-//               case DELETE_FRIENDS:
-//               return {
-//                   ...state,
-//                   deleteFriends: true,
-//                 //   fetchingFriends: true, //might change
-//               }
-//               case DELETE_SUCCESS:
-//               return {
-//                   ...state,
-//                   fetchingFriends: false,
-//                   error: null,
-//                   friends: action.payload
-                
-//               }
-//               case DELETE_FAILURE:
-//               return {
-//                 ...state,
-//                 error: action.payload,
-//                 fetchingFriends: false
-//               }

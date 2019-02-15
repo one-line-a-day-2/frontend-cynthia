@@ -5,23 +5,16 @@ import './App.css';
 import LogIn from './components/auth/Login'
 import SignUp from './components/auth/SignUp'
 import HomePage from './components/homepage/HomePage'
-// import { fetchEntry } from './actions';
+// import JournalEntry from './components/homepage/JournalEntry'
 import { Route } from 'react-router-dom'
-// import { connect } from "react-redux";
-import JournalEntry from './components/homepage/JournalEntry';
+
 
 
 
 
 class App extends Component {
-  constructor(props){
-    super(props); 
-  }
   
-// componentDidMount() {
-//   this.props.fetchEntry();
-//   console.log(this.props.fetchEntry())
-// }
+
 
 
   render() {
@@ -30,7 +23,7 @@ class App extends Component {
       <Route  exact path='/'  component={HomePage}  />
       <Route path='/login' component={LogIn} />
       <Route path='/signup' component={SignUp} />
-      <Route path='/journalentry' component={JournalEntry} />
+      {/* <Route path='/journalentry' component={JournalEntry} /> */}
      
 
 
