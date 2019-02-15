@@ -26,7 +26,7 @@ const initialState = {
      userId: localStorage.getItem('userId'),
      entries: [],
      deleteEntries: false,
-     isEditing: false,
+     isUpdating: false,
      noteToUpdate: null 
     
 };
@@ -121,7 +121,13 @@ const initialState = {
                     fetchEntries: false,
                     error: false,
                     isUpdating: false,
-                    entries: [...state.entries, action.payload]
+                    entries: state.entries.map(entry => { 
+                        if( entry.id === action.payload.id) {
+                            return action.payload //edited updated entry 
+                        } else {
+                            return entry
+                        }
+                    })
                 }
         case ENTRY_EDIT_FAILURE: 
                 return {

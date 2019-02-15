@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -40,6 +40,7 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
+    
   },
 });
 
@@ -47,8 +48,8 @@ const styles = theme => ({
 function JournalForm(props) {
   const handleClick = e => {
     e.preventDefault();
-    if (props.isUpdating) {
-      props.editEntry();
+    if (props.isEditing) {
+      props.updateEntry();
     } else {
       props.addEntry();
     }
@@ -64,7 +65,7 @@ function JournalForm(props) {
       <Paper className={styles.paper}  style={{margin: '50px'}} >
      
         <Typography component="h1" variant="h5" >
-        {props.isUpdating ? 'Update Entry' : 'Add Entry'}
+        {props.isEditing ? 'Update Entry' : 'Add Entry'}
         </Typography>
 
         <form className={styles.form} onSubmit={props.addEntry} >
@@ -81,10 +82,10 @@ function JournalForm(props) {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            // color="primary"
             className={styles.submit}
           >
-            {props.isUpdating ? 'Update Entry' : 'Add Entry'}
+            {props.isEditing? 'Update Entry' : 'Add Entry'}
           </Button>
         </form>
       </Paper>

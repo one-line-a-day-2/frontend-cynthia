@@ -9,8 +9,9 @@ class HomePage extends Component {
     constructor(props) {
         super(props);
           this.state = {
-            isUpdating: false,
-            entry: ''
+            isEditing: false,
+            entry: '',
+            activeEntry: null
           }
     
      }
@@ -41,13 +42,18 @@ deleteEntry = (e , entryId) => {
 }
   
   editEntry =  entry  => {
-    //   e.preventDefault();
-      const updateEntry = this.props.entries.find(e => e.id === entry.id )
-      this.props.editEntry(this.props.userId, entry)
-    this.setState({ entry: updateEntry, isUpdating: false });
+      console.log(entry)
+    this.setState({ entry: entry.entry,  isEditing: true, activeEntry: entry.id });
    
 }
-  
+
+//like the populated form 
+updateEntry = () => {
+  const entry = this.props.entries.find(entry => entry.id === this.state.activeEntry) 
+  const updatedEntry = {...entry, entry: this.state.entry}   //...entry=full object, entry:entry field, this.state.entry=text
+  this.props.editEntry(this.props.userId, updatedEntry )
+  this.setState({ entry: '', isEditing: false, activeEntry: null})
+}
 
 
     render() {
@@ -55,7 +61,7 @@ deleteEntry = (e , entryId) => {
         return (
         <div className="cards">
             <NavBar />
-            <JournalForm  handleChanges={this.handleChanges} editEntry={this.editEntry} isUpdating={this.isUpdating} addEntry={this.addEntry} />
+            <JournalForm updateEntry={this.updateEntry} handleChanges={this.handleChanges} entry={this.state.entry} editEntry={this.editEntry} isEditing={this.state.isEditing} addEntry={this.addEntry} />
             <Entry entries={this.props.entries} editEntry={this.editEntry}  deleteEntry={this.deleteEntry}/>
         </div>
     );

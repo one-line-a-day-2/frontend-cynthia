@@ -42,6 +42,7 @@ function Entry(props) {
 
         
         {props.entries.map( entry => {
+          
                 return (
                 <div> 
                   <p key={entry.id} > {entry.entry}</p> 
