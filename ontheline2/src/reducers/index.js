@@ -23,7 +23,7 @@ const initialState = {
     fetchLogin: false,
     fetchEntries: false,
      error: null,
-     userId: 0,
+     userId: localStorage.getItem('userId'),
      entries: [],
      deleteEntries: false,
      isEditing: false,
@@ -121,7 +121,7 @@ const initialState = {
                     fetchEntries: false,
                     error: false,
                     isUpdating: false,
-                    entries: action.payload
+                    entries: [...state.entries, action.payload]
                 }
         case ENTRY_EDIT_FAILURE: 
                 return {

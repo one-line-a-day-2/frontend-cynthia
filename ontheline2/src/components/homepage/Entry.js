@@ -45,7 +45,7 @@ function Entry(props) {
                 return (
                 <div> 
                   <p key={entry.id} > {entry.entry}</p> 
-                <i onClick={() => props.editEntry(entry.userid, entry.id)}className="fas fa-user-edit"></i>
+                <i onClick={() => props.editEntry(entry)}className="fas fa-user-edit"></i>
                  <i onClick={e => props.deleteEntry(e, entry.id)} className="fas fa-trash-alt"></i>  
                   </div>
         )})}

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { common } from '@material-ui/core/colors';
 
 export const LOGIN_USER_START= 'LOGIN_USER_START';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
@@ -31,6 +32,7 @@ export const login = logins => dispatch => {
       .then(res => {
        
         localStorage.setItem("jwt", res.data.token);
+        localStorage.setItem('userId', res.data.id)
         dispatch({
           type: LOGIN_USER_SUCCESS,
           payload: res.data.id
@@ -101,27 +103,25 @@ export const addNewEntry = (userID, enter) => dispatch => {
 
 
 
-    export const editEntry = (userID, entryID, edit) => dispatch => {
+    export const editEntry = (userID, entry) => dispatch => {
         dispatch({ type: ENTRY_EDIT_START });
         const token = localStorage.getItem("jwt");
-        const edits = {
+        const editToken = {
           headers: {
             Authorization: token
-          }
+          } 
         };
         axios
           .put(
-            `https://one-line-a-day-2.herokuapp.com/api/users/${userID}/entries/${entryID}`,
-            edit,
-            edits
-          )
+            `https://one-line-a-day-2.herokuapp.com/api/users/${userID}/entries/${entry.id}`, entry, editToken)
           .then(res => {
-
             dispatch({
               type: ENTRY_EDIT_SUCCESS,
-              payload: res.data
-            });
-          })
+              payload: entry
+          }) 
+        })
           .catch(err => dispatch({ type: ENTRY_EDIT_FAILURE, payload: err }));
       };
 
+
+      

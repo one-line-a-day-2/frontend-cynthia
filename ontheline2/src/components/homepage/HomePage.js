@@ -16,6 +16,7 @@ class HomePage extends Component {
      }
 
 componentDidMount() {
+    console.log(this.props.userId)
     this.props.fetchEntry(this.props.userId);
 }
 
@@ -39,16 +40,12 @@ deleteEntry = (e , entryId) => {
   });
 }
   
-  editEntry =  entryId  => {
+  editEntry =  entry  => {
     //   e.preventDefault();
-      const updateEntry = this.props.entries.find(entry => entry.id === entryId )
-      this.props.editEntry(this.props.userId, entryId, {
-      entry: this.state.entry,
-      user_id: this.props.userId,
-      })
-     
+      const updateEntry = this.props.entries.find(e => e.id === entry.id )
+      this.props.editEntry(this.props.userId, entry)
     this.setState({ entry: updateEntry, isUpdating: false });
-    // this.props.fetchEntry();
+   
 }
   
 
@@ -58,7 +55,7 @@ deleteEntry = (e , entryId) => {
         return (
         <div className="cards">
             <NavBar />
-            <JournalForm  handleChanges={this.handleChanges} isUpdating={this.isUpdating} addEntry={this.addEntry} />
+            <JournalForm  handleChanges={this.handleChanges} editEntry={this.editEntry} isUpdating={this.isUpdating} addEntry={this.addEntry} />
             <Entry entries={this.props.entries} editEntry={this.editEntry}  deleteEntry={this.deleteEntry}/>
         </div>
     );
